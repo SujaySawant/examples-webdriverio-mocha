@@ -3,6 +3,7 @@ var SignInPage = require('../../../app/pages/signInPage')
 var OffersPage = require('../../../app/pages/offersPage')
 
 describe('StackDemo Offers', () => {
+
   it('Check offers for India', async () => {
     await HomePage.signInLink.click()
     await SignInPage.login(browser.config.accounts[0].username, browser.config.accounts[0].password)
@@ -17,4 +18,5 @@ describe('StackDemo Offers', () => {
     await OffersPage.firstOffer.click();
     await expect(OffersPage.allOffers).toBeElementsArrayOfSize(3);
   })
+
 })

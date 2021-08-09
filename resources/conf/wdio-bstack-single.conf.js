@@ -14,14 +14,11 @@ var overrides = {
       'projectName': 'BrowserStack',
       'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
       'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
-      // 'os': 'Windows',
-      // 'osVersion': '10'
-      'osVersion': '13',
-      'deviceName': 'iPhone 11',
-      'realMobile': 'true'
+      'os': 'Windows',
+      'osVersion': '10'
     },
-    browserName: 'iPhone',
-    // browserVersion: 'latest'
+    browserName: 'Chrome',
+    browserVersion: 'latest'
   }],
   after: async (result, capabilities, specs) => {
     if ((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {

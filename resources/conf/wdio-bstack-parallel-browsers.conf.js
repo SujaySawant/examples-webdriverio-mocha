@@ -14,7 +14,7 @@ var overrides = {
     './src/test/suites/user/*.js'
   ],
   host: 'hub.browserstack.com',
-  maxInstancesPerCapability: 2,
+  maxInstances: 10,
   capabilities: [{
     'bstack:options': {
       'projectName': 'BrowserStack',

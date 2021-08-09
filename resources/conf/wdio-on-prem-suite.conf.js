@@ -10,6 +10,11 @@ var overrides = {
     './src/test/suites/e2e/*.js',
     './src/test/suites/user/*.js'
   ],
+  maxInstances: 1,
+  capabilities: [{
+    browserName: 'chrome',
+    acceptInsecureCerts: true
+  }]
 };
 
 exports.config = _.defaultsDeep(overrides, defaults.config);

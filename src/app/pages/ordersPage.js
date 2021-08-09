@@ -10,13 +10,9 @@ class OrdersPage extends Page {
   get allOrders() { return $$('.order') }
   get firstOrder() { return $('.order') }
 
-  // async waitforOrdersToDisplay() {
-  //   await this.firstOrder.waitForDisplayed({ timeout: 5000 });
-  // }
-
   async open() {
     await super.open('orders')
   }
 }
 
-module.exports = new OrdersPage();
+module.exports = new OrdersPage()

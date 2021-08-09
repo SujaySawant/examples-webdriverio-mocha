@@ -1,6 +1,3 @@
-const _ = require('lodash');
-const expectChai = require('chai').expect;
-
 var HomePage = require('../../../app/pages/homePage')
 var SignInPage = require('../../../app/pages/signInPage')
 var FavouritesPage = require('../../../app/pages/favouritesPage')

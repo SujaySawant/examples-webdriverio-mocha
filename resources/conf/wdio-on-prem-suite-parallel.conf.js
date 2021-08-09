@@ -10,8 +10,10 @@ var overrides = {
     './src/test/suites/e2e/*.js',
     './src/test/suites/user/*.js'
   ],
+  maxInstances: 5,
   capabilities: [{
-    maxInstances: 5
+    browserName: 'chrome',
+    acceptInsecureCerts: true
   }],
 };
 

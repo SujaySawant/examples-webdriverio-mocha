@@ -23,4 +23,4 @@ class SignInPage extends Page {
   }
 }
 
-module.exports = new SignInPage();
+module.exports = new SignInPage()

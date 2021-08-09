@@ -10,4 +10,5 @@ describe('StackDemo filters', () => {
     let all_prices = await HomePage.getAllPrices()
     expectChai(_.isEqual(all_prices, _.orderBy(all_prices, [], ['asc']))).to.equal(true, "Lowest to Highest filter is not applied")
   })
+
 })

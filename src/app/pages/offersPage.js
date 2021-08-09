@@ -15,4 +15,4 @@ class OffersPage extends Page {
   }
 }
 
-module.exports = new OffersPage();
+module.exports = new OffersPage()

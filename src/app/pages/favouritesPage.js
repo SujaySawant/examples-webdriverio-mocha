@@ -14,4 +14,4 @@ class FavouritesPage extends Page {
   }
 }
 
-module.exports = new FavouritesPage();
+module.exports = new FavouritesPage()

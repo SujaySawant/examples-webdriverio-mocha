@@ -14,4 +14,4 @@ class ConfirmationPage extends Page {
   }
 }
 
-module.exports = new ConfirmationPage();
+module.exports = new ConfirmationPage()

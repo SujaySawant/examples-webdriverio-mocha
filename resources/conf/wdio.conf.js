@@ -7,11 +7,6 @@ exports.config = {
   specs: [
     ''
   ],
-  capabilities: [{
-    // maxInstances: 1,
-    browserName: 'chrome',
-    acceptInsecureCerts: true
-  }],
   logLevel: 'silent',
   coloredLogs: true,
   bail: 0,
@@ -32,13 +27,11 @@ exports.config = {
   }]],
   mochaOpts: {
     ui: 'bdd',
-    timeout: 60000
+    timeout: 120000
   },
-
   beforeTest: async (test, context) => {
     await browser.url('')
   },
-
   afterTest: async (test, context, { error, result, duration, passed, retries }) => {
     await browser.execute(() => sessionStorage.clear())
     if (error) {

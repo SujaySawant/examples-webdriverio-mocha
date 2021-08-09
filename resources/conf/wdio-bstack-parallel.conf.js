@@ -14,7 +14,7 @@ var overrides = {
     './src/test/suites/user/*.js'
   ],
   host: 'hub.browserstack.com',
-  maxInstancesPerCapability: 5,
+  maxInstances: 10,
   capabilities: [{
     'bstack:options': {
       'projectName': 'BrowserStack',
@@ -33,7 +33,6 @@ var overrides = {
     } else {
       await browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + path.basename(specs[0]) + "\" }}");
     }
-
     if (result == 0) {
       await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
     } else {
@@ -43,7 +42,3 @@ var overrides = {
 };
 
 exports.config = _.defaultsDeep(overrides, defaults.config);
-
-// exports.config.capabilities.forEach(function (caps) {
-//   for (var i in exports.config.commonCapabilities) caps[i] = caps[i] || exports.config.commonCapabilities[i];
-// });
