@@ -48,13 +48,13 @@ class HomePage extends Page {
   async getAllPrices() {
     return this.allPrices.map((element) => {
       return parseInt(element.getText())
-    });
+    })
   }
 
   async getAllPhones() {
     return this.allPhones.map((element) => {
       return element.getText()
-    });
+    })
   }
 
   async waitToLoad() {

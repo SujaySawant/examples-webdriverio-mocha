@@ -1,44 +1,106 @@
-var defaults = require("./wdio.conf.js");
-var browserstack = require('browserstack-local');
-var _ = require("lodash");
+var defaults = require("./wdio.conf.js")
+var browserstack = require('browserstack-local')
+var _ = require("lodash")
+var path = require("path")
+var mini = require('minimist')
 
-timeStamp = new Date().getTime();
+var timeStamp = new Date().getTime()
 
 var overrides = {
   user: process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME',
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
   specs: [
-    './src/test/suites/login/*.js',
-    './src/test/suites/offers/*.js',
-    './src/test/suites/product/*.js',
-    './src/test/suites/e2e/*.js',
-    './src/test/suites/user/*.js'
+    './src/test/suites/**'
   ],
   host: 'hub.browserstack.com',
   baseUrl: 'http://localhost:3000/',
   waitforTimeout: 50000,
-  commonCapabilities: {
-    maxInstances: 1,
-    'browserstack.maskCommands':'setValues, getValues, setCookies, getCookies',
-    'browserstack.debug': true,
-    'browserstack.video': true,
-    'browserstack.networkLogs': true,
-    'browserstack.local': true,
-    acceptInsecureCerts: true,
-    "browserstack.localIdentifier": timeStamp,
-    name: (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
-    build: process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio' + " - " + new Date().getTime()
-  },
+  maxInstances: 10,
   capabilities: [{
-    device: "Samsung Galaxy S21",
-    os_version: "11.0",
-    real_mobile: "true",
+    'bstack:options': {
+      'projectName': 'BrowserStack',
+      'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
+      'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+      'debug': true,
+      'networkLogs': true,
+      'video': true,
+      'local': true,
+      'localIdentifier': timeStamp,
+      'maskCommands': 'setValues, getValues, setCookies, getCookies',
+      'os': 'Windows',
+      'osVersion': '10'
+    },
+    browserName: 'Chrome',
+    browserVersion: 'latest',
+    acceptInsecureCerts: true
+  }, {
+    'bstack:options': {
+      'projectName': 'BrowserStack',
+      'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
+      'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+      'debug': true,
+      'networkLogs': true,
+      'video': true,
+      'local': true,
+      'localIdentifier': timeStamp,
+      'maskCommands': 'setValues, getValues, setCookies, getCookies',
+      'os': 'OS X',
+      'osVersion': 'Catalina'
+    },
+    browserName: 'Safari',
+    browserVersion: 'latest',
+    acceptInsecureCerts: true
+  }, {
+    'bstack:options': {
+      'projectName': 'BrowserStack',
+      'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
+      'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+      'debug': true,
+      'networkLogs': true,
+      'video': true,
+      'local': true,
+      'localIdentifier': timeStamp,
+      'maskCommands': 'setValues, getValues, setCookies, getCookies',
+      'osVersion': '10.0',
+      'deviceName': 'Samsung Galaxy S20',
+      'realMobile': 'true'
+    },
     browserName: 'Android',
-  },{
-    device: "OnePlus 9",
-    os_version: "11.0",
-    real_mobile: "true",
-    browserName: 'Android',
+    acceptInsecureCerts: true
+  }, {
+    'bstack:options': {
+      'projectName': 'BrowserStack',
+      'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
+      'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+      'debug': true,
+      'networkLogs': true,
+      'video': true,
+      'local': true,
+      'localIdentifier': timeStamp,
+      'maskCommands': 'setValues, getValues, setCookies, getCookies',
+      'osVersion': '13',
+      'deviceName': 'iPhone 11',
+      'realMobile': 'true'
+    },
+    browserName: 'iPhone',
+    acceptInsecureCerts: true
+  }, {
+    'bstack:options': {
+      'projectName': 'BrowserStack',
+      'buildName': process.env.BROWSERSTACK_BUILD_NAME || 'browserstack-examples-webdriverio - ' + new Date().getTime(),
+      'sessionName': (require('minimist')(process.argv.slice(2)))['bstack-session-name'] || 'default_name',
+      'debug': true,
+      'networkLogs': true,
+      'video': true,
+      'local': true,
+      'localIdentifier': timeStamp,
+      'maskCommands': 'setValues, getValues, setCookies, getCookies',
+      'os': 'OS X',
+      'osVersion': 'Catalina'
+    },
+    browserName: 'Chrome',
+    browserVersion: 'latest',
+    acceptInsecureCerts: true
   }],
   onPrepare: function (config, capabilities) {
     console.log("Connecting local");
@@ -46,7 +108,6 @@ var overrides = {
       exports.bs_local = new browserstack.Local();
       exports.bs_local.start({ 'key': exports.config.key, 'localIdentifier': timeStamp }, function (error) {
         if (error) return reject(error);
-
         console.log('Connected. Now testing...');
         resolve();
       });
@@ -60,25 +121,19 @@ var overrides = {
       });
     });
   },
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    if((require('minimist')(process.argv.slice(2)))['bstack-session-name']) {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" +
-        (require('minimist')(process.argv.slice(2)))['bstack-session-name'] +  "\" }}");
+  after: async (result, capabilities, specs) => {
+    if ((mini(process.argv.slice(2)))['bstack-session-name']) {
+      await browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + (mini(process.argv.slice(2)))['bstack-session-name'] + "\" }}")
     } else {
-      browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + test.title +  "\" }}");
+      await browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + path.basename(specs[0]) + "\" }}")
     }
-
-    if(passed) {
-      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
+    if (result == 0) {
+      await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}')
     } else {
-      browser.takeScreenshot();
-      browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}');
+      await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Script execution failed"}}')
     }
   }
 }
 
-exports.config = _.defaultsDeep(overrides, defaults.config);
+exports.config = _.defaultsDeep(overrides, defaults.config)
 
-exports.config.capabilities.forEach(function(caps){
-  for(var i in exports.config.commonCapabilities) caps[i] = caps[i] || exports.config.commonCapabilities[i];
-});

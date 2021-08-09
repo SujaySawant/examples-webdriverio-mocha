@@ -35,7 +35,7 @@ exports.config = {
   afterTest: async (test, context, { error, result, duration, passed, retries }) => {
     await browser.execute(() => sessionStorage.clear())
     if (error) {
-      await browser.takeScreenshot();
+      await browser.takeScreenshot()
     }
-  },
+  }
 }

@@ -10,6 +10,6 @@ var overrides = {
     browserName: 'chrome',
     acceptInsecureCerts: true
   }]
-};
+}
 
-exports.config = _.defaultsDeep(overrides, defaults.config);
+exports.config = _.defaultsDeep(overrides, defaults.config)

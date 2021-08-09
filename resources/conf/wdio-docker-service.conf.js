@@ -14,10 +14,10 @@ var overrides = {
       p: ['4444:4444'],
       shmSize: '2g'
     }
-  },
-};
+  }
+}
 
-exports.config = _.defaultsDeep(overrides, defaults.config);
+exports.config = _.defaultsDeep(overrides, defaults.config)
 exports.config.hostname = 'localhost'
 exports.config.port= 4444
 exports.config.path= '/wd/hub'

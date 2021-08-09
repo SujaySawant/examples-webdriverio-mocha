@@ -3,11 +3,7 @@ var _ = require("lodash");
 
 var overrides = {
   specs: [
-    './src/test/suites/login/*.js',
-    './src/test/suites/offers/*.js',
-    './src/test/suites/product/*.js',
-    './src/test/suites/e2e/*.js',
-    './src/test/suites/user/*.js'
+    './src/test/suites/**'
   ],
   services: ['docker'],
   dockerOptions: {
@@ -19,14 +15,14 @@ var overrides = {
       shmSize: '2g'
     }
   },
+  maxInstances: 5,
   capabilities: [{
-    maxInstances: 5,
     browserName: 'chrome',
     acceptInsecureCerts: true
-  }],
-};
+  }]
+}
 
-exports.config = _.defaultsDeep(overrides, defaults.config);
+exports.config = _.defaultsDeep(overrides, defaults.config)
 exports.config.hostname = 'localhost'
 exports.config.port= 4444
 exports.config.path= '/wd/hub'
