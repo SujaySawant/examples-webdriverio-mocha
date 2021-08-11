@@ -1,4 +1,3 @@
-var fs = require('fs');
 const accounts = require('../data/user.json')
 
 exports.config = {
