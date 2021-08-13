@@ -66,6 +66,6 @@ var overrides = {
       await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Script execution failed"}}')
     }
   }
-};
+}
 
 exports.config = _.defaultsDeep(overrides, defaults.config)

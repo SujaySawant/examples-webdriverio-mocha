@@ -1,5 +1,5 @@
-var defaults = require("./wdio.conf.js");
-var _ = require("lodash");
+var defaults = require("./wdio.conf.js")
+var _ = require("lodash")
 var path = require("path")
 var mini = require('minimist')
 
@@ -86,6 +86,6 @@ var overrides = {
       await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Script execution failed"}}')
     }
   }
-};
+}
 
 exports.config = _.defaultsDeep(overrides, defaults.config)

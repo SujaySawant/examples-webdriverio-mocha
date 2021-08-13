@@ -1,5 +1,5 @@
-var defaults = require("./wdio.conf.js");
-var _ = require("lodash");
+var defaults = require("./wdio.conf.js")
+var _ = require("lodash")
 
 var overrides = {
   testData: [],

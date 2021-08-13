@@ -9,7 +9,7 @@ describe('Password input validation', () => {
       await HomePage.signInLink.click()
       await SignInPage.login(item.username, item.password)
       await expect(SignInPage.errorMessage).toHaveText(item.expected_message)
-    });
+    })
   })
 
-});
+})
