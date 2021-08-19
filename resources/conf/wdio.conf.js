@@ -28,10 +28,10 @@ exports.config = {
     ui: 'bdd',
     timeout: 120000
   },
-  beforeTest: async (test, context) => {
+  beforeTest: async () => {
     await browser.url('')
   },
-  afterTest: async (test, context, { error, result, duration, passed, retries }) => {
+  afterTest: async ({ error }) => {
     await browser.execute(() => sessionStorage.clear())
     if (error) {
       await browser.takeScreenshot()

@@ -34,25 +34,24 @@ var overrides = {
     browserVersion: 'latest',
     acceptInsecureCerts: true
   }],
-  onPrepare: function (config, capabilities) {
+  onPrepare: () => {
     console.log("Connecting local");
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       exports.bs_local = new browserstack.Local();
-      exports.bs_local.start({ 'key': exports.config.key, 'localIdentifier': timeStamp }, function (error) {
-        if (error) return reject(error);
-
-        console.log('Connected. Now testing...');
-        resolve();
-      });
-    });
+      exports.bs_local.start({ 'key': exports.config.key, 'localIdentifier': timeStamp }, (error) => {
+        if (error) return reject(error)
+        console.log('Connected. Now testing...')
+        resolve()
+      })
+    })
   },
-  onComplete: function (capabilties, specs) {
-    return new Promise(function(resolve, reject){
-      exports.bs_local.stop(function() {
-        console.log("Binary stopped");
-        resolve();
-      });
-    });
+  onComplete: () => {
+    return new Promise((resolve) => {
+      exports.bs_local.stop(() => {
+        console.log("Binary stopped")
+        resolve()
+      })
+    })
   },
   after: async (result, capabilities, specs) => {
     if ((mini(process.argv.slice(2)))['bstack-session-name']) {
@@ -60,7 +59,7 @@ var overrides = {
     } else {
       await browser.executeScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + path.basename(specs[0]) + "\" }}")
     }
-    if (result == 0) {
+    if (result === 0) {
       await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}')
     } else {
       await browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Script execution failed"}}')
