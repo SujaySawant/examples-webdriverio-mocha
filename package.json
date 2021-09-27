@@ -23,7 +23,7 @@
   "license": "ISC",
   "devDependencies": {
     "@rpii/wdio-html-reporter": "^6.3.1",
-    "@wdio/allure-reporter": "^7.0.1",
+    "@wdio/allure-reporter": "^7.10.1",
     "@wdio/cli": "^7.9.0",
     "@wdio/local-runner": "^7.9.0",
     "@wdio/mocha-framework": "^7.9.0",

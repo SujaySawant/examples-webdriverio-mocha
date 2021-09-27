@@ -15,8 +15,8 @@ describe('StackDemo Offers', () => {
       }
     })
     await HomePage.offersLink.click()
-    await OffersPage.firstOffer.click();
-    await expect(OffersPage.allOffers).toBeElementsArrayOfSize(3);
+    await OffersPage.firstOffer.click()
+    await expect(OffersPage.allOffers).toBeElementsArrayOfSize(3)
   })
 
 })

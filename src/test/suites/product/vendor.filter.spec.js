@@ -8,7 +8,7 @@ describe('StackDemo filters', () => {
     await HomePage.clickVendor('Apple')
     await HomePage.waitToLoad()
     let all_phones = await HomePage.getAllPhones()
-    expectChai(_.every(all_phones, (value) => _.includes(value, 'iPhone'))).to.equal(true, "Vendor filter is not applied");
+    expectChai(_.every(all_phones, (value) => _.includes(value, 'iPhone'))).to.equal(true, "Vendor filter is not applied")
   })
 
 })

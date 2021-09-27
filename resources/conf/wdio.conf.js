@@ -6,7 +6,7 @@ exports.config = {
   specs: [
     ''
   ],
-  logLevel: 'silent',
+  logLevel: 'warn',
   coloredLogs: true,
   bail: 0,
   baseUrl: 'https://bstackdemo.com/',

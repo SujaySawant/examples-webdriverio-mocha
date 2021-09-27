@@ -46,15 +46,11 @@ class HomePage extends Page {
   }
 
   async getAllPrices() {
-    return this.allPrices.map((element) => {
-      return parseInt(element.getText())
-    })
+    return this.allPrices.map((element) => parseInt(element.getText()))
   }
 
   async getAllPhones() {
-    return this.allPhones.map((element) => {
-      return element.getText()
-    })
+    return this.allPhones.map((element) => element.getText())
   }
 
   async waitToLoad() {
@@ -67,9 +63,7 @@ class HomePage extends Page {
   }
 
   async getAllImagesSrcAttribute() {
-    return this.allImages.map((element) => {
-      return element.getAttribute("src")
-    })
+    return this.allImages.map((element) => element.getAttribute("src"))
   }
 
 }
